@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    kubernetes:
+      config:
+        namespace: param-env
+        sources:
+          - name: classify-api-security
+      reload:
+        enabled: true
+        period: 10000
+        mode: polling
