@@ -1,9 +1,5 @@
 package com.telarg.security;
 
-import com.telarg.security.data.entities.Role;
-import com.telarg.security.data.entities.User;
-import com.telarg.security.repositories.RoleRepository;
-import com.telarg.security.repositories.UserRepository;
 import com.telarg.security.utils.InitBD;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -25,9 +21,6 @@ import com.telarg.security.security.CustomEntryPoint;
 import com.telarg.security.security.CustomSuccessHandler;
 import com.telarg.security.security.CustomcustomFailureHandler;
 import com.telarg.security.security.JsonAuthenticationFilter;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @EnableWebSecurity
 @EnableFeignClients
