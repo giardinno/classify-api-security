@@ -4,7 +4,7 @@ spring:
       config:
         namespace: param-env
         sources:
-          - name: classify-api-security
+          - name: service-name
       reload:
         enabled: true
         period: 10000
