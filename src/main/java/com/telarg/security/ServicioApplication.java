@@ -25,8 +25,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
-
 @EnableWebSecurity
 @EnableFeignClients
 @SpringBootApplication
@@ -55,11 +53,8 @@ public class ServicioApplication extends WebSecurityConfigurerAdapter implements
 
 	@Bean
 	protected CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-		configuration.setAllowedMethods(Arrays.asList("GET","POST"));
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
+		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
 		return source;
 	}
 	
@@ -71,7 +66,10 @@ public class ServicioApplication extends WebSecurityConfigurerAdapter implements
 			.authenticationEntryPoint(customEntryPoint);
 
 		http.cors()
+			.and().authorizeRequests().anyRequest().permitAll()
 			.and().csrf().disable();
+
+		http.formLogin().permitAll();
 
 		http.addFilterAt( customAuthenticationFilter() , UsernamePasswordAuthenticationFilter.class );
 
