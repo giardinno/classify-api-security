@@ -21,6 +21,9 @@ import com.telarg.security.security.CustomEntryPoint;
 import com.telarg.security.security.CustomSuccessHandler;
 import com.telarg.security.security.CustomcustomFailureHandler;
 import com.telarg.security.security.JsonAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @EnableWebSecurity
 @EnableFeignClients
@@ -47,6 +50,13 @@ public class ServicioApplication extends WebSecurityConfigurerAdapter implements
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(customUserDetailService);
 	}
+
+	@Bean
+	protected CorsConfigurationSource corsConfigurationSource() {
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		return source;
+	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -56,10 +66,9 @@ public class ServicioApplication extends WebSecurityConfigurerAdapter implements
 			.authenticationEntryPoint(customEntryPoint);
 
 		http.cors()
-			.and()
-			.csrf().disable()
-			.authorizeRequests().antMatchers("/**").authenticated();
-
+			.and().authorizeRequests().anyRequest().permitAll()
+			.and().csrf().disable();
+		
 		http.formLogin().permitAll();
 
 		http.addFilterAt( customAuthenticationFilter() , UsernamePasswordAuthenticationFilter.class );
