@@ -20,8 +20,8 @@ public class JsonAuthenticationFilter extends UsernamePasswordAuthenticationFilt
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         UsernamePasswordAuthenticationToken authRequest;
         try ( InputStream is = request.getInputStream() ) {
-            System.out.println(IOUtils.toString(is));
             DocumentContext context = JsonPath.parse(is);
+            System.out.println(IOUtils.toString(is));
             String username = context.read("$.username", String.class);
             String password = context.read("$.password", String.class);
             authRequest = new UsernamePasswordAuthenticationToken(username, password);
