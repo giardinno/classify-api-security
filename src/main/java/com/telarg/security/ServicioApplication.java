@@ -72,7 +72,7 @@ public class ServicioApplication extends WebSecurityConfigurerAdapter implements
 
 		http.cors()
 			.and().csrf().disable();
-		
+
 		http.addFilterAt( customAuthenticationFilter() , UsernamePasswordAuthenticationFilter.class );
 
 	}
