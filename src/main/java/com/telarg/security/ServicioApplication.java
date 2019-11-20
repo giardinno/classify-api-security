@@ -58,7 +58,7 @@ public class ServicioApplication extends WebSecurityConfigurerAdapter implements
 		http.cors()
 			.and()
 			.csrf().disable()
-			.authorizeRequests().antMatchers("/**").authenticated();
+			.authorizeRequests().antMatchers("http://localhost:4200").authenticated();
 
 		http.formLogin().permitAll();
 
