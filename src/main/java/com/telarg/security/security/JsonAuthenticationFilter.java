@@ -5,6 +5,7 @@ import java.io.InputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -19,9 +20,8 @@ public class JsonAuthenticationFilter extends UsernamePasswordAuthenticationFilt
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         UsernamePasswordAuthenticationToken authRequest;
         try ( InputStream is = request.getInputStream() ) {
-            System.out.println(is.toString());
+            System.out.println(IOUtils.toString(is));
             DocumentContext context = JsonPath.parse(is);
-            System.out.println(is.toString());
             String username = context.read("$.username", String.class);
             String password = context.read("$.password", String.class);
             authRequest = new UsernamePasswordAuthenticationToken(username, password);
