@@ -51,23 +51,24 @@ public class ServicioApplication extends WebSecurityConfigurerAdapter implements
 		auth.userDetailsService(customUserDetailService);
 	}
 
-	@Bean
+	/*@Bean
 	protected CorsConfigurationSource corsConfigurationSource() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
 		return source;
-	}
+	}*/
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
+
 		http
-			.exceptionHandling()
-			.authenticationEntryPoint(customEntryPoint);
+				.exceptionHandling()
+				.authenticationEntryPoint(customEntryPoint);
 
 		http.cors()
-			.and().authorizeRequests().anyRequest().permitAll()
-			.and().csrf().disable();
+				.and()
+				.csrf().disable()
+				.authorizeRequests().antMatchers("/**").authenticated();
 
 		http.formLogin().permitAll();
 
