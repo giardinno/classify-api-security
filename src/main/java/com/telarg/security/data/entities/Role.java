@@ -15,6 +15,9 @@ public class Role implements GrantedAuthority {
 	@NotEmpty
 	private String name;
 
+	@ManyToOne
+	private User user;
+
 	public String getName() {
 		return name;
 	}
@@ -28,4 +31,7 @@ public class Role implements GrantedAuthority {
 		return name;
 	}
 
+	public User getUser() { return user; }
+
+	public void setUser(User user) { this.user = user; }
 }
