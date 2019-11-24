@@ -26,7 +26,7 @@ public class Historico {
 
     public Clasificacion getClasificacion() { return clasificacion; }
 
-    public void setClasificacion(Clasificacion clasificaciones) { this.clasificacion = clasificaciones; }
+    public void setClasificacion(Clasificacion clasificacion) { this.clasificacion = clasificacion; }
 
     public String getMessage() { return message; }
 

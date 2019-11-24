@@ -13,7 +13,7 @@ public class Clasificacion {
 
     private String tag;
 
-    @OneToOne(mappedBy = "clasificaciones")
+    @OneToOne(mappedBy = "clasificacion")
     private Historico historico;
 
     public Clasificacion(){}
