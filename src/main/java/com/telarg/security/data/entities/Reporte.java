@@ -19,6 +19,8 @@ public class Reporte {
 
     private String expresiones;
 
+    public Reporte(){}
+
     public Reporte( Clasificacion clasificacion) {
         this.id = clasificacion.getClassifications();
         this.clasificacion = clasificacion;
