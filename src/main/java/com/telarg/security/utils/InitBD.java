@@ -45,6 +45,12 @@ public class InitBD {
             user.setRoles(roles);
             roleRepository.save(role);
             userRepository.save(user);
+            User user2 = new User();
+            user2.setName("admin2");
+            user2.setPassword("78[vVx-UUVS#&xX<");
+            user2.setRoles(roles);
+            userRepository.save(user2);
+
             log.info("ñlakjsd entreee");
             for (Classifications classification: Classifications.values()){
                 log.info("añlksdjfñlaskjdfñalksdjf " + classification);
