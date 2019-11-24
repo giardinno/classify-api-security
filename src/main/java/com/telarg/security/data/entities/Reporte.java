@@ -13,7 +13,15 @@ public class Reporte {
 
     private long contador;
 
+    private String expresiones;
+
     public Reporte(){ }
+
+    public Reporte(Classifications classifications, String expresiones, int contador) {
+        this.classifications = classifications;
+        this.expresiones = expresiones;
+        this.contador = contador;
+    }
 
     public Reporte(Classifications classifications, int contador) {
         this.classifications = classifications;
@@ -28,6 +36,8 @@ public class Reporte {
         this.classifications = classifications;
     }
 
+    public String getExpresiones() { return expresiones; }
+
     public long getContador() {
         return contador;
     }
@@ -35,5 +45,7 @@ public class Reporte {
     public void setContador(long contador) {
         this.contador = contador;
     }
+
+    public void setExpresiones(String expresiones) { this.expresiones = expresiones; }
 
 }

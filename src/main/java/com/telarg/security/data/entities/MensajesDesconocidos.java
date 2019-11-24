@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Historico {
+public class MensajesDesconocidos {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -15,14 +15,13 @@ public class Historico {
     @OneToOne()
     private Clasificaciones clasificaciones;
 
-
     @Size(max = 150)
     private String message;
 
-    public Historico(){}
+    public MensajesDesconocidos(){}
 
-    public Historico(Clasificaciones clasificaciones, @Size(max = 150) String message) {
-        this.clasificaciones = clasificaciones;
+    public MensajesDesconocidos(@Size(max = 150) String message) {
+        this.clasificaciones = new Clasificaciones(Classifications.DESCONOCIDO);
         this.message = message;
     }
 
@@ -30,7 +29,9 @@ public class Historico {
 
     public void setClasificaciones(Clasificaciones clasificaciones) { this.clasificaciones = clasificaciones; }
 
-    public String getMessage() { return message; }
+    public String getMessage() {
+        return message;
+    }
 
     public void setMessage(String message) {
         this.message = message;

@@ -1,8 +1,10 @@
 package com.telarg.security.utils;
 
+import com.telarg.security.data.entities.Clasificaciones;
 import com.telarg.security.data.entities.Historico;
 import com.telarg.security.data.entities.Role;
 import com.telarg.security.data.entities.User;
+import com.telarg.security.repositories.ClasificacionesRepository;
 import com.telarg.security.repositories.HistoricoRepository;
 import com.telarg.security.repositories.RoleRepository;
 import com.telarg.security.repositories.UserRepository;
@@ -31,6 +33,9 @@ public class InitBD {
     @Autowired
     private HistoricoRepository historicoRepository;
 
+    @Autowired
+    private ClasificacionesRepository clasificacionesRepository;
+
     public void init(){
         if (!userRepository.findByName("admin").isPresent()){
             User user = new User();
@@ -43,8 +48,11 @@ public class InitBD {
             user.setRoles(roles);
             roleRepository.save(role);
             userRepository.save(user);
+            for (Classifications classification: Classifications.values()){
+                clasificacionesRepository.save(new Clasificaciones(classification));
+            }
+            setHistoric();
         }
-        setHistoric();
     }
 
     private void setHistoric(){
@@ -56,8 +64,7 @@ public class InitBD {
                 log.info(st);
                 String[] historico = st.split("\\|");
                 historicoRepository.save(new Historico(
-                    Classifications.fromValue(historico[1]),
-                    historico[0],
+                    new Clasificaciones(Classifications.fromValue(historico[0])),
                     historico[1]
                 ));
             }

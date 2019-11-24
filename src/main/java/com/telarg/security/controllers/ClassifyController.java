@@ -1,10 +1,11 @@
 package com.telarg.security.controllers;
 
-import com.telarg.security.data.entities.Historico;
+import com.telarg.security.data.entities.MensajesDesconocidos;
 import com.telarg.security.data.entities.Reporte;
 import com.telarg.security.data.vo.ClassifyRequest;
 import com.telarg.security.data.vo.ClassifyResponse;
 import com.telarg.security.repositories.HistoricoRepository;
+import com.telarg.security.repositories.MensajesDesconocidosRepository;
 import com.telarg.security.repositories.ReporteRepository;
 import com.telarg.security.services.fiengClients.ClassifyClient;
 import com.telarg.security.utils.Classifications;
@@ -30,6 +31,9 @@ public class ClassifyController {
     @Autowired
     private HistoricoRepository historicoRepository;
 
+    @Autowired
+    private MensajesDesconocidosRepository mensajesDesconocidosRepository;
+
     @PostMapping("/classify")
     public ResponseEntity<Object> classify(@Valid @RequestBody ClassifyRequest classifyRequest){
         ClassifyResponse classifyResponse= classifyClient.getClasification(classifyRequest);
@@ -45,7 +49,7 @@ public class ClassifyController {
             reporteRepository.save(reporte);
         } else {
             if (!historicoRepository.findByMessage(classifyRequest.getMessage().trim()).isPresent())
-                historicoRepository.save(new Historico(Classifications.DESCONOCIDO, classifyRequest.getMessage().trim(), Classifications.DESCONOCIDO.value()));
+                mensajesDesconocidosRepository.save(new MensajesDesconocidos(classifyRequest.getMessage().trim()));
         }
         return new ResponseEntity<>(classifyResponse, HttpStatus.CREATED);
     }
