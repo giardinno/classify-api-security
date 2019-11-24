@@ -45,6 +45,7 @@ public class InitBD {
             user.setRoles(roles);
             roleRepository.save(role);
             userRepository.save(user);
+            log.info("ñlakjsd entreee");
             for (Classifications classification: Classifications.values()){
                 log.info("añlksdjfñlaskjdfñalksdjf " + classification);
                 Clasificacion clasificacion = new Clasificacion(classification);
