@@ -35,24 +35,8 @@ public class InitBD {
 
     public void init(){
         if (!userRepository.findByName("admin").isPresent()){
-            Role role = new Role();
-            role.setName("ADMIN");
-            roleRepository.save(role);
-            Set<Role> roles = new HashSet<>();
-            roles.add(role);
-
-            User user = new User();
-            user.setName("admin");
-            user.setPassword("78[vVx-UUVS#&xX<");
-            user.setRoles(roles);
-            userRepository.save(user);
-            User user2 = new User();
-            user2.setName("admin2");
-            user2.setPassword("78[vVx-UUVS#&xX<");
-            user2.setRoles(roles);
-            userRepository.save(user2);
-
-
+            genUser("ADMIN", "admin", "78[vVx-UUVS#&xX<");
+            genUser("CUSTOMER", "customer", "78[vVx-UUVS#&xX<");
             for (Classifications classification: Classifications.values()){
                 Clasificacion clasificacion = new Clasificacion(classification);
                 clasificacionesRepository.save( clasificacion );
@@ -60,6 +44,19 @@ public class InitBD {
             }
             setHistoric();
         }
+    }
+
+    private void genUser(String roleName, String userName, String pass){
+        Role role = new Role();
+        role.setName(roleName);
+        roleRepository.save(role);
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        User user = new User();
+        user.setName(userName);
+        user.setPassword(pass);
+        user.setRoles(roles);
+        userRepository.save(user);
     }
 
     private void setHistoric(){
