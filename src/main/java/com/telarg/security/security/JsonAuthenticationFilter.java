@@ -12,13 +12,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 
 public class JsonAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	
 	@Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         UsernamePasswordAuthenticationToken authRequest;
-        try ( InputStream is = request.getInputStream() ) {
+
+
+        ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
+
+
+        try ( InputStream is = requestWrapper.getInputStream() ) {
             DocumentContext context = JsonPath.parse(is);
             String username = context.read("$.username", String.class);
             String password = context.read("$.password", String.class);
@@ -27,7 +33,7 @@ public class JsonAuthenticationFilter extends UsernamePasswordAuthenticationFilt
             e.printStackTrace();
             authRequest = new UsernamePasswordAuthenticationToken("", "");
         }
-        setDetails(request, authRequest);
+        setDetails(requestWrapper, authRequest);
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 	
