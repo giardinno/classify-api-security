@@ -41,6 +41,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 		try {
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@");
 			System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
+			System.out.println(SecurityContextHolder.getContext().getAuthentication().getCredentials());
 		}catch (Exception e){
 			System.out.println(e);
 		}
