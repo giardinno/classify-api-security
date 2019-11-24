@@ -32,11 +32,16 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 		String token = RequestContextHolder.currentRequestAttributes().getSessionId();
 		TokenDTO tokenDTO = new TokenDTO();
 		tokenDTO.setIdToken(token);
+
+
+
 		try ( InputStream is = request.getInputStream() ) {
 			DocumentContext context = JsonPath.parse(is);
 			String username = context.read("$.username", String.class);
 			tokenDTO.setUser( userRepository.findByName(username).get() );
 			tokenDTO.getUser().setPassword(null);
+			is.reset();
+			is.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

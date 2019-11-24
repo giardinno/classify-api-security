@@ -23,6 +23,8 @@ public class JsonAuthenticationFilter extends UsernamePasswordAuthenticationFilt
             String username = context.read("$.username", String.class);
             String password = context.read("$.password", String.class);
             authRequest = new UsernamePasswordAuthenticationToken(username, password);
+            is.reset();
+            is.close();
         } catch (Exception e) {
             e.printStackTrace();
             authRequest = new UsernamePasswordAuthenticationToken("", "");
