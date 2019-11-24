@@ -46,14 +46,18 @@ public class InitBD {
             roleRepository.save(role);
             userRepository.save(user);
 
-            System.out.println("ñlakjsd entreee");
+            User user2 = new User();
+            user2.setName("admin2");
+            user2.setPassword("78[vVx-UUVS#&xX<");
+            user2.setRoles(roles);
+            userRepository.save(user2);
+
+
             for (Classifications classification: Classifications.values()){
-                System.out.println("añlksdjfñlaskjdfñalksdjf " + classification);
                 Clasificacion clasificacion = new Clasificacion(classification);
                 clasificacionesRepository.save( clasificacion );
                 reporteRepository.save(new Reporte(clasificacion));
             }
-            System.out.println("ñlakjsd salu");
             setHistoric();
         }
     }
@@ -64,7 +68,6 @@ public class InitBD {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String st;
             while ((st = br.readLine()) != null) {
-                log.info(st);
                 String[] historico = st.split("\\|");
                 historicoRepository.save(new Historico(
                     new Clasificacion(Classifications.fromValue(historico[0])),
