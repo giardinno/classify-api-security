@@ -16,6 +16,7 @@ public class Role implements GrantedAuthority {
 	private String name;
 
 	@ManyToOne
+	@JoinColumn(name="user_id", nullable=false)
 	private User user;
 
 	public String getName() {

@@ -19,7 +19,7 @@ public class User {
 	@NotEmpty
 	private String password;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user")
 	private Set<Role> roles;
 
 	public User() { }
