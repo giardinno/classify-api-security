@@ -50,7 +50,7 @@ public class InitBD {
 
     private void setHistoric(){
         try {
-            File file = new ClassPathResource("data/historico.txt").getFile();
+            File file = new ClassPathResource("historico.txt").getFile();
             BufferedReader br = new BufferedReader(new FileReader(file));
             String st;
             while ((st = br.readLine()) != null) {
