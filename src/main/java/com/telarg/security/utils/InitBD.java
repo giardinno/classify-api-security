@@ -46,10 +46,12 @@ public class InitBD {
             roleRepository.save(role);
             userRepository.save(user);
             for (Classifications classification: Classifications.values()){
+                log.info("añlksdjfñlaskjdfñalksdjf " + classification);
                 Clasificacion clasificacion = new Clasificacion(classification);
                 clasificacionesRepository.save( clasificacion );
                 reporteRepository.save(new Reporte(clasificacion));
             }
+            log.info("ñlakjsd salu");
             setHistoric();
         }
     }
