@@ -19,7 +19,7 @@ public class User {
 	@NotEmpty
 	private String password;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Role> roles;
 
 	public User() { }

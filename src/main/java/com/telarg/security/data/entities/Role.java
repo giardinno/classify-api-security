@@ -17,7 +17,7 @@ public class Role implements GrantedAuthority {
 	@NotEmpty
 	private String name;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<User> user;
 
 	public String getName() {
