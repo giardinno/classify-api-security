@@ -1,6 +1,5 @@
 package com.telarg.security.utils;
 
-import com.sun.org.apache.xml.internal.security.Init;
 import com.telarg.security.data.entities.Historico;
 import com.telarg.security.data.entities.Role;
 import com.telarg.security.data.entities.User;
