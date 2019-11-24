@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 
 @Component
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
@@ -38,13 +39,16 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
 
 		try {
-			BufferedReader reader = request.getReader();
-			Gson gson = new Gson();
-			User user = gson.fromJson(reader, User.class);
-			System.out.println( user.getName() );
-			System.out.println( user.getPassword() );
-			tokenDTO.setUser(userRepository.findByName(user.getName()).get());
-			tokenDTO.getUser().setPassword(null);
+			ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
+			try ( InputStream is = requestWrapper.getInputStream() ) {
+				DocumentContext context = JsonPath.parse(is);
+				String username = context.read("$.username", String.class);
+				String password = context.read("$.password", String.class);
+				tokenDTO.setUser(userRepository.findByName(username).get());
+				tokenDTO.getUser().setPassword(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}catch (Exception e){
 			System.out.println(e);
 		}
