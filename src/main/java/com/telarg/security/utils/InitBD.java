@@ -35,17 +35,17 @@ public class InitBD {
 
     public void init(){
         if (!userRepository.findByName("admin").isPresent()){
+            Role role = new Role();
+            role.setName("ADMIN");
+            roleRepository.save(role);
+            Set<Role> roles = new HashSet<>();
+            roles.add(role);
+
             User user = new User();
             user.setName("admin");
             user.setPassword("78[vVx-UUVS#&xX<");
-            Role role = new Role();
-            role.setName("ADMIN");
-            Set<Role> roles = new HashSet<>();
-            roles.add(role);
             user.setRoles(roles);
-            roleRepository.save(role);
             userRepository.save(user);
-
             User user2 = new User();
             user2.setName("admin2");
             user2.setPassword("78[vVx-UUVS#&xX<");

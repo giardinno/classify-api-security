@@ -19,7 +19,7 @@ public class User {
 	@NotEmpty
 	private String password;
 
-	@OneToMany(mappedBy = "user")
+	@ManyToMany
 	private Set<Role> roles;
 
 	public User() { }
