@@ -1,7 +1,5 @@
 package com.telarg.security.data.entities;
 
-import com.telarg.security.utils.Classifications;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -13,7 +11,7 @@ public class Historico {
     private Integer id;
 
     @OneToOne()
-    private Clasificaciones clasificaciones;
+    private Clasificacion clasificacion;
 
 
     @Size(max = 150)
@@ -21,14 +19,14 @@ public class Historico {
 
     public Historico(){}
 
-    public Historico(Clasificaciones clasificaciones, @Size(max = 150) String message) {
-        this.clasificaciones = clasificaciones;
+    public Historico(Clasificacion clasificacion, @Size(max = 150) String message) {
+        this.clasificacion = clasificacion;
         this.message = message;
     }
 
-    public Clasificaciones getClasificaciones() { return clasificaciones; }
+    public Clasificacion getClasificacion() { return clasificacion; }
 
-    public void setClasificaciones(Clasificaciones clasificaciones) { this.clasificaciones = clasificaciones; }
+    public void setClasificacion(Clasificacion clasificaciones) { this.clasificacion = clasificaciones; }
 
     public String getMessage() { return message; }
 

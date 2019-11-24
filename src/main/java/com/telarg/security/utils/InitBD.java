@@ -1,13 +1,7 @@
 package com.telarg.security.utils;
 
-import com.telarg.security.data.entities.Clasificaciones;
-import com.telarg.security.data.entities.Historico;
-import com.telarg.security.data.entities.Role;
-import com.telarg.security.data.entities.User;
-import com.telarg.security.repositories.ClasificacionesRepository;
-import com.telarg.security.repositories.HistoricoRepository;
-import com.telarg.security.repositories.RoleRepository;
-import com.telarg.security.repositories.UserRepository;
+import com.telarg.security.data.entities.*;
+import com.telarg.security.repositories.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +30,9 @@ public class InitBD {
     @Autowired
     private ClasificacionesRepository clasificacionesRepository;
 
+    @Autowired
+    private ReporteRepository reporteRepository;
+
     public void init(){
         if (!userRepository.findByName("admin").isPresent()){
             User user = new User();
@@ -49,7 +46,9 @@ public class InitBD {
             roleRepository.save(role);
             userRepository.save(user);
             for (Classifications classification: Classifications.values()){
-                clasificacionesRepository.save(new Clasificaciones(classification));
+                Clasificacion clasificacion = new Clasificacion(classification);
+                clasificacionesRepository.save( clasificacion );
+                reporteRepository.save(new Reporte(clasificacion));
             }
             setHistoric();
         }
@@ -64,7 +63,7 @@ public class InitBD {
                 log.info(st);
                 String[] historico = st.split("\\|");
                 historicoRepository.save(new Historico(
-                    new Clasificaciones(Classifications.fromValue(historico[0])),
+                    new Clasificacion(Classifications.fromValue(historico[0])),
                     historico[1]
                 ));
             }

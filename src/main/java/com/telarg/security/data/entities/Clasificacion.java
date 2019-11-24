@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Clasificaciones {
+public class Clasificacion {
 
     @Id
     private Classifications classifications;
@@ -16,9 +16,9 @@ public class Clasificaciones {
     @OneToOne(mappedBy = "clasificaciones")
     private Historico historico;
 
-    public Clasificaciones(){}
+    public Clasificacion(){}
 
-    public Clasificaciones(Classifications classifications) {
+    public Clasificacion(Classifications classifications) {
         this.classifications = classifications;
         this.tag = classifications.value();
     }

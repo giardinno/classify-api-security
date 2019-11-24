@@ -13,7 +13,7 @@ public class MensajesDesconocidos {
     private Integer id;
 
     @OneToOne()
-    private Clasificaciones clasificaciones;
+    private Clasificacion clasificacion;
 
     @Size(max = 150)
     private String message;
@@ -21,13 +21,13 @@ public class MensajesDesconocidos {
     public MensajesDesconocidos(){}
 
     public MensajesDesconocidos(@Size(max = 150) String message) {
-        this.clasificaciones = new Clasificaciones(Classifications.DESCONOCIDO);
+        this.clasificacion = new Clasificacion(Classifications.DESCONOCIDO);
         this.message = message;
     }
 
-    public Clasificaciones getClasificaciones() { return clasificaciones; }
+    public Clasificacion getClasificacion() { return clasificacion; }
 
-    public void setClasificaciones(Clasificaciones clasificaciones) { this.clasificaciones = clasificaciones; }
+    public void setClasificacion(Clasificacion clasificacion) { this.clasificacion = clasificacion; }
 
     public String getMessage() {
         return message;

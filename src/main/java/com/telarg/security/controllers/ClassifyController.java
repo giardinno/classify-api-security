@@ -40,15 +40,14 @@ public class ClassifyController {
         Classifications classifications = Classifications.fromValue(classifyResponse.getTag());
         if ( classifications != null && !classifications.equals(Classifications.DESCONOCIDO)) {
             Optional<Reporte> reporteResponse = reporteRepository.findById(classifications);
-            Reporte reporte;
             if (reporteResponse.isPresent()) {
+                Reporte reporte;
                 reporte = reporteResponse.get();
                 reporte.setContador(reporte.getContador() + 1);
-            } else
-                reporte = new Reporte(classifications, 1);
-            reporteRepository.save(reporte);
+                reporteRepository.save(reporte);
+            }
         } else {
-            if (!historicoRepository.findByMessage(classifyRequest.getMessage().trim()).isPresent())
+            if (!mensajesDesconocidosRepository.findByMessage(classifyRequest.getMessage().trim()).isPresent())
                 mensajesDesconocidosRepository.save(new MensajesDesconocidos(classifyRequest.getMessage().trim()));
         }
         return new ResponseEntity<>(classifyResponse, HttpStatus.CREATED);
