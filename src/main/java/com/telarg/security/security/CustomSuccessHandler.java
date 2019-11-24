@@ -30,6 +30,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 		tokenDTO.setIdToken(token);
 		try {
 			tokenDTO.setUser( userRepository.findByName( SecurityContextHolder.getContext().getAuthentication().getName() ).get() );
+			tokenDTO.getUser().setPassword(null);
 		}catch (Exception e){
 			System.out.println(e);
 		}

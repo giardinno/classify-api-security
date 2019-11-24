@@ -53,7 +53,7 @@ public class ServicioApplication extends WebSecurityConfigurerAdapter implements
 		auth.userDetailsService(customUserDetailService);
 	}
 
-	/*@Bean
+	@Bean
 	protected CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
@@ -61,13 +61,13 @@ public class ServicioApplication extends WebSecurityConfigurerAdapter implements
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
 		return source;
-	}*/
+	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 
-		/*http
+		http
 				.exceptionHandling()
 				.authenticationEntryPoint(customEntryPoint);
 
@@ -79,7 +79,7 @@ public class ServicioApplication extends WebSecurityConfigurerAdapter implements
 
 		http.addFilterAt( customAuthenticationFilter() , UsernamePasswordAuthenticationFilter.class );
 
-		*/
+		/*
 		http
 				.exceptionHandling()
 				.authenticationEntryPoint(customEntryPoint);
@@ -92,6 +92,7 @@ public class ServicioApplication extends WebSecurityConfigurerAdapter implements
 		http.formLogin().permitAll();
 
 		http.addFilterAt( customAuthenticationFilter() , UsernamePasswordAuthenticationFilter.class );
+		*/
 
 
 	}
