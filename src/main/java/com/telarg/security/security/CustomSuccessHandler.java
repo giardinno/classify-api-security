@@ -18,6 +18,7 @@ import com.telarg.security.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -34,18 +35,12 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-		
 		String token = RequestContextHolder.currentRequestAttributes().getSessionId();
 		TokenDTO tokenDTO = new TokenDTO();
 		tokenDTO.setIdToken(token);
-
 		try {
-			HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-			Enumeration<String> attributes = req.getSession().getAttributeNames();
-			while(attributes.hasMoreElements()){
-				String attribute = attributes.nextElement();
-				System.out.println(attribute + ": " + req.getSession().getAttribute(attribute));
-			}
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@");
+			System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
 		}catch (Exception e){
 			System.out.println(e);
 		}
