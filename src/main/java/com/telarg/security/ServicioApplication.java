@@ -21,9 +21,6 @@ import com.telarg.security.security.CustomEntryPoint;
 import com.telarg.security.security.CustomSuccessHandler;
 import com.telarg.security.security.CustomcustomFailureHandler;
 import com.telarg.security.security.JsonAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @EnableWebSecurity
 @EnableFeignClients
@@ -51,13 +48,6 @@ public class ServicioApplication extends WebSecurityConfigurerAdapter implements
 		auth.userDetailsService(customUserDetailService);
 	}
 
-	/*@Bean
-	protected CorsConfigurationSource corsConfigurationSource() {
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-		return source;
-	}*/
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
