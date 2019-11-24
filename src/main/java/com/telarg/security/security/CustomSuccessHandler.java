@@ -3,6 +3,7 @@ package com.telarg.security.security;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 
 @Component
@@ -37,17 +39,12 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 		TokenDTO tokenDTO = new TokenDTO();
 		tokenDTO.setIdToken(token);
 
-
 		try {
-			ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
-			try ( InputStream is = requestWrapper.getInputStream() ) {
-				DocumentContext context = JsonPath.parse(is);
-				String username = context.read("$.username", String.class);
-				String password = context.read("$.password", String.class);
-				tokenDTO.setUser(userRepository.findByName(username).get());
-				tokenDTO.getUser().setPassword(null);
-			} catch (Exception e) {
-				e.printStackTrace();
+			HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+			Enumeration<String> attributes = req.getSession().getAttributeNames();
+			while(attributes.hasMoreElements()){
+				String attribute = attributes.nextElement();
+				System.out.println(attribute + ": " + req.getSession().getAttribute(attribute));
 			}
 		}catch (Exception e){
 			System.out.println(e);
