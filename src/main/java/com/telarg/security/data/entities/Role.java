@@ -5,6 +5,8 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Set;
+
 @Entity
 public class Role implements GrantedAuthority {
 
@@ -16,7 +18,7 @@ public class Role implements GrantedAuthority {
 	private String name;
 
 	@ManyToMany
-	private User user;
+	private Set<User> user;
 
 	public String getName() {
 		return name;
@@ -31,7 +33,7 @@ public class Role implements GrantedAuthority {
 		return name;
 	}
 
-	public User getUser() { return user; }
+	public Set<User> getUser() { return user; }
 
-	public void setUser(User user) { this.user = user; }
+	public void setUser(Set<User> user) { this.user = user; }
 }
