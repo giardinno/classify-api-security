@@ -3,6 +3,7 @@ package com.telarg.security.controllers;
 import com.telarg.security.data.entities.Clasificacion;
 import com.telarg.security.data.entities.Historico;
 import com.telarg.security.data.entities.MensajesDesconocidos;
+import com.telarg.security.data.vo.DesconocidosResponse;
 import com.telarg.security.repositories.HistoricoRepository;
 import com.telarg.security.repositories.MensajesDesconocidosRepository;
 import com.telarg.security.utils.Classifications;
@@ -22,7 +23,7 @@ public class DesconocidosController {
 
     @GetMapping("/desconocidos")
     public ResponseEntity<Object> getDesconocidos(){
-        return new ResponseEntity<>(mensajesDesconocidosRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(new DesconocidosResponse(mensajesDesconocidosRepository.findAll()), HttpStatus.OK);
     }
 
     @PostMapping("/desconocidos/{id}")
