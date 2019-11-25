@@ -26,10 +26,15 @@ public class DesconocidosController {
         return new ResponseEntity<>(new DesconocidosResponse(mensajesDesconocidosRepository.findAll()), HttpStatus.OK);
     }
 
-    @PostMapping("/desconocidos/{id}")
-    public ResponseEntity<Object> saveDesconocido(@PathVariable("id") int id){
+    @PostMapping("/desconocidos/{id}/{classId}")
+    public ResponseEntity<Object> saveDesconocido(@PathVariable("id") int id, @PathVariable("classId") int classId){
         MensajesDesconocidos  mensajesDesconocidos = mensajesDesconocidosRepository.findById(id).get();
-        historicoRepository.save(new Historico(new Clasificacion(Classifications.RECONOCIMIENTO), mensajesDesconocidos.getMessage()));
+        historicoRepository.save(
+            new Historico(
+                new Clasificacion(Classifications.values()[classId]),
+                mensajesDesconocidos.getMessage()
+            )
+        );
         mensajesDesconocidosRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
