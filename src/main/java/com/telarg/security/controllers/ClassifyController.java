@@ -41,13 +41,7 @@ public class ClassifyController {
     @PostMapping("/classify")
     public ResponseEntity<Object> classify(@Valid @RequestBody ClassifyRequest classifyRequest){
         ResponseEntity<ClassifyResponse> classifyResponse= classifyClient.getClasification(classifyRequest);
-        log.info("###################### ");
-        log.info(classifyResponse);
         Classifications classifications = Classifications.fromValue(classifyResponse.getBody().getTag());
-        log.info(classifyResponse.getBody().getTag());
-        log.info(classifyResponse.getBody().getValue());
-        log.info(classifications.value());
-        log.info("######################");
         if ( classifications != null && !classifications.equals(Classifications.DESCONOCIDO)) {
             Optional<Reporte> reporteResponse = reporteRepository.findById(classifications);
             if (reporteResponse.isPresent()) {
@@ -60,7 +54,7 @@ public class ClassifyController {
             if (!mensajesDesconocidosRepository.findByMessage(classifyRequest.getMessage().trim()).isPresent())
                 mensajesDesconocidosRepository.save(new MensajesDesconocidos(classifyRequest.getMessage().trim()));
         }
-        return new ResponseEntity<>(classifyResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(classifyResponse.getBody(), HttpStatus.CREATED);
     }
 
 }
