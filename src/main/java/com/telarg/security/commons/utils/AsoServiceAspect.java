@@ -26,7 +26,7 @@ public class AsoServiceAspect {
     LoggerMetrics loggerMetrics;
 
     @Around("execution(* com.telarg.security.services.fiengClients.*.*(..))")
-    public ResponseEntity<Object> asoServiceExecution(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public ResponseEntity<ClassifyResponse> asoServiceExecution(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
                 .currentRequestAttributes())
                 .getRequest();
@@ -36,7 +36,7 @@ public class AsoServiceAspect {
             ResponseEntity<ClassifyResponse> result = (ResponseEntity<ClassifyResponse>) proceedingJoinPoint.proceed();
             loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
                     200, result.getBody().getTag() + " : " +  result.getBody().getValue(),environment.getProperty("spring.application.name"), false);
-            return new ResponseEntity<>(result, HttpStatus.OK);
+            return result;
         } catch(Exception e) {
             e.printStackTrace();
             loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
