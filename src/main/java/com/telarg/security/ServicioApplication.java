@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,6 +23,7 @@ import com.telarg.security.security.CustomSuccessHandler;
 import com.telarg.security.security.CustomcustomFailureHandler;
 import com.telarg.security.security.JsonAuthenticationFilter;
 
+@EnableAspectJAutoProxy
 @EnableWebSecurity
 @EnableFeignClients
 @SpringBootApplication
