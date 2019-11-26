@@ -61,5 +61,5 @@ Reconocimiento|Quiero agradecer y felicitar al ejecutivo por su gran trabajo.
 Reconocimiento|Solo para agradecer su asesoria y apoyo el dia de hoy.
 Reconocimiento|Vaya que tuve suerte que me hayas respondido tu.
 Reconocimiento|Muchas gracias por el apoyo brindado.
-Reconocimiento|Esta vez me ayudaron y arreglaron mi problema en un par de minutos, eres eficaz y eficiente.
+Reconocimiento|Estoy muy agradecido, esta vez me ayudaron y arreglaron mi problema en un par de minutos, eres eficaz y eficiente.
 Reconocimiento|Solucionaron de manera veloz mi problema, muchas gracas por su ayuda.
