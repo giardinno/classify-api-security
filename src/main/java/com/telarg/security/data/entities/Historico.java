@@ -10,7 +10,8 @@ public class Historico {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    @OneToOne()
+    @ManyToOne
+    @JoinColumn(name="clasificacion_classifications")
     private Clasificacion clasificacion;
 
 

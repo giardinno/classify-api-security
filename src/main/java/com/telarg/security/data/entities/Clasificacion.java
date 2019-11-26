@@ -4,6 +4,7 @@ import com.telarg.security.utils.Classifications;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 public class Clasificacion {
@@ -13,8 +14,8 @@ public class Clasificacion {
 
     private String tag;
 
-    @OneToOne(mappedBy = "clasificacion")
-    private Historico historico;
+    @OneToMany(mappedBy="clasificacion")
+    private Set<Historico> historico;
 
     public Clasificacion(){}
 
