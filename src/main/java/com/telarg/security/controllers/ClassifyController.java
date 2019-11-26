@@ -41,7 +41,8 @@ public class ClassifyController {
     @PostMapping("/classify")
     public ResponseEntity<Object> classify(@Valid @RequestBody ClassifyRequest classifyRequest){
         ClassifyResponse classifyResponse= classifyClient.getClasification(classifyRequest);
-        log.info("######################");
+        log.info("###################### ");
+        log.info(classifyResponse);
         Classifications classifications = Classifications.fromValue(classifyResponse.getTag());
         log.info(classifyResponse.getTag());
         log.info(classifyResponse.getValue());
