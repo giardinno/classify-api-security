@@ -2,6 +2,8 @@ package com.telarg.security.controllers;
 
 import com.telarg.security.repositories.ReporteRepository;
 import com.telarg.security.utils.Classifications;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +17,11 @@ public class ReportsController {
     @Autowired
     private ReporteRepository reporteRepository;
 
+    private Log log = LogFactory.getLog(ReportsController.class);
+
     @GetMapping("/reports/{classification-id}")
     public ResponseEntity<Object> getReport(@PathVariable("classification-id") String classificationId){
+        log.info(classificationId);
         return new ResponseEntity<>(
             reporteRepository.findById(Classifications.values()[Integer.parseInt(classificationId)]).get(),
             HttpStatus.OK
