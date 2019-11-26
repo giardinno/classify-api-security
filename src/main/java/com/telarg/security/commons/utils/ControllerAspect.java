@@ -33,34 +33,41 @@ public class ControllerAspect {
             " @annotation(org.springframework.web.bind.annotation.PostMapping) || " +
             "@annotation(org.springframework.web.bind.annotation.RequestMapping)) && execution(public * *(..))")
     public Object controllerExecution(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        Long timeStarted = System.currentTimeMillis();
-        String applicationName = environment.getProperty("spring.application.name") != null ? environment.getProperty("spring.application.name") : "";
-
-        HttpServletRequest request = null;
         try {
-            request = ((ServletRequestAttributes) RequestContextHolder
-                    .currentRequestAttributes())
-                    .getRequest();
-        }catch (Exception e){
+            log.info("paso 1");
+            Long timeStarted = System.currentTimeMillis();
+            String applicationName = environment.getProperty("spring.application.name") != null ? environment.getProperty("spring.application.name") : "";
+            log.info("paso 2");
+            HttpServletRequest request = null;
+            try {
+                request = ((ServletRequestAttributes) RequestContextHolder
+                        .currentRequestAttributes())
+                        .getRequest();
+            } catch (Exception e) {
+                e.printStackTrace();
+                log.error(e);
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            String transactionId = request.getHeader(environment.getProperty("Authorization"));
+            try {
+                ResponseEntity<Object> result = (ResponseEntity<Object>) proceedingJoinPoint.proceed();
+                loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
+                        result.getStatusCode().value(), result.getBody(), applicationName);
+                return result;
+            } catch (Exception e) {
+                log.info(e);
+                log.info(" No mames2");
+                e.printStackTrace();
+                loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
+                        500, "Error en el servicio", applicationName);
+                System.out.println("No mamessss3333");
+
+            }
+        } catch(Exception e){
             e.printStackTrace();
             log.error(e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        String transactionId = request.getHeader(environment.getProperty("Authorization"));
-        try{
-            ResponseEntity<Object> result = (ResponseEntity<Object>) proceedingJoinPoint.proceed();
-            loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
-                                     result.getStatusCode().value(),result.getBody(),applicationName);
-            return result;
-        } catch(Exception e) {
-            log.info(e);
-            log.info(" No mames2");
-            e.printStackTrace();
-            loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
-            500 ,"Error en el servicio",applicationName);
-            System.out.println("No mamessss3333");
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 
