@@ -15,6 +15,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.Response;
 
 
 @Aspect
@@ -32,7 +33,7 @@ public class ControllerAspect {
     @Around("(@annotation(org.springframework.web.bind.annotation.GetMapping) ||" +
             " @annotation(org.springframework.web.bind.annotation.PostMapping) || " +
             "@annotation(org.springframework.web.bind.annotation.RequestMapping)) && execution(public * *(..))")
-    public Object controllerExecution(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public ResponseEntity<Object> controllerExecution(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
             Long timeStarted = System.currentTimeMillis();
             String applicationName = environment.getProperty("spring.application.name") != null ? environment.getProperty("spring.application.name") : "";
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
@@ -46,7 +47,6 @@ public class ControllerAspect {
                 e.printStackTrace();
                 loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
                         500, "Error en el servicio", applicationName, true);
-
             }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
