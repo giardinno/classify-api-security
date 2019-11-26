@@ -14,7 +14,7 @@ Falta de Servicio|Unicamente puedo enviar mensajes de texto, no me sirve este se
 Cobros indebidos|Yo nunca hé descargado ningún juego y me lo estan cobrando
 Cobros indebidos|Realicé el pago en el dia indicado, y aún así me me cobran comisión por pago tardío
 Cobros indebidos|Realicé el pago en el día indicado, y aún asi me me cobran recargos
-Cobros indebidos|puse una recarga de 50 pesos de paquete, y me dieron 7 dias, y al siguiente dia por error mi hijo puso otra recarga de 50 al mismo numero, porque no sabia él que ya la habia puesto yo un dia antes
+Cobros indebidos|El cobro que me están haciendo sobre el servicio es demasiado, no es lo que contraté
 Cobros indebidos|No es posible que tenga que estar cerciorandome de que me cobran lo adecuado que contraté con ustedes
 Cobros indebidos|Estoy revisando mi estado de cuenta y encuentro triplicado un cargo.
 Cobros indebidos|Me están cobrando el doble de lo que deberían
