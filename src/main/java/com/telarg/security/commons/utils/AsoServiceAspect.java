@@ -31,14 +31,11 @@ public class AsoServiceAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
                 .currentRequestAttributes())
                 .getRequest();
-        Object[] parameterData = proceedingJoinPoint.getArgs();
-        String smc = (String) parameterData[parameterData.length-1];
-        URI uri = (URI) parameterData[2];
         Long timeStarted = System.currentTimeMillis();
         String transactionId = request.getHeader("Authorization");
         try{
             ClassifyResponse result = (ClassifyResponse) proceedingJoinPoint.proceed();
-            loggerMetrics.saveMetric(timeStarted, uri.getPath(), transactionId, "telarg.app",
+            loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
                     200, result.getValue() + " : " +  result.getValue(),environment.getProperty("spring.application.name"));
             return result;
         } catch(Exception e) {
