@@ -9,6 +9,8 @@ import com.telarg.security.repositories.MensajesDesconocidosRepository;
 import com.telarg.security.repositories.ReporteRepository;
 import com.telarg.security.services.fiengClients.ClassifyClient;
 import com.telarg.security.utils.Classifications;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +36,17 @@ public class ClassifyController {
     @Autowired
     private MensajesDesconocidosRepository mensajesDesconocidosRepository;
 
+    private Log log = LogFactory.getLog(ClassifyController.class);
+
     @PostMapping("/classify")
     public ResponseEntity<Object> classify(@Valid @RequestBody ClassifyRequest classifyRequest){
         ClassifyResponse classifyResponse= classifyClient.getClasification(classifyRequest);
+        log.info("######################");
         Classifications classifications = Classifications.fromValue(classifyResponse.getTag());
+        log.info(classifyResponse.getTag());
+        log.info(classifyResponse.getValue());
+        log.info(classifications.value());
+        log.info("######################");
         if ( classifications != null && !classifications.equals(Classifications.DESCONOCIDO)) {
             Optional<Reporte> reporteResponse = reporteRepository.findById(classifications);
             if (reporteResponse.isPresent()) {
