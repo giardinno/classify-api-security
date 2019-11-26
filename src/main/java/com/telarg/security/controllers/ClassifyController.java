@@ -40,12 +40,12 @@ public class ClassifyController {
 
     @PostMapping("/classify")
     public ResponseEntity<Object> classify(@Valid @RequestBody ClassifyRequest classifyRequest){
-        ClassifyResponse classifyResponse= classifyClient.getClasification(classifyRequest);
+        ResponseEntity<ClassifyResponse> classifyResponse= classifyClient.getClasification(classifyRequest);
         log.info("###################### ");
         log.info(classifyResponse);
-        Classifications classifications = Classifications.fromValue(classifyResponse.getTag());
-        log.info(classifyResponse.getTag());
-        log.info(classifyResponse.getValue());
+        Classifications classifications = Classifications.fromValue(classifyResponse.getBody().getTag());
+        log.info(classifyResponse.getBody().getTag());
+        log.info(classifyResponse.getBody().getValue());
         log.info(classifications.value());
         log.info("######################");
         if ( classifications != null && !classifications.equals(Classifications.DESCONOCIDO)) {
