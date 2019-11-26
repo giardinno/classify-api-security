@@ -35,7 +35,7 @@ public class AsoServiceAspect {
         String smc = (String) parameterData[parameterData.length-1];
         URI uri = (URI) parameterData[2];
         Long timeStarted = System.currentTimeMillis();
-        String transactionId = request.getHeader(environment.getProperty("Authorization"));
+        String transactionId = request.getHeader("Authorization");
         try{
             System.out.println("No jueguess");
             ClassifyResponse result = (ClassifyResponse) proceedingJoinPoint.proceed();

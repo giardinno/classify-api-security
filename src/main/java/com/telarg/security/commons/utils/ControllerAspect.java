@@ -48,7 +48,7 @@ public class ControllerAspect {
                 log.error(e);
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            String transactionId = request.getHeader(environment.getProperty("Authorization"));
+            String transactionId = request.getHeader("Authorization");
             try {
                 ResponseEntity<Object> result = (ResponseEntity<Object>) proceedingJoinPoint.proceed();
                 loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
