@@ -29,6 +29,7 @@ public class ControllerAspect {
             " @annotation(org.springframework.web.bind.annotation.PostMapping) || " +
             "@annotation(org.springframework.web.bind.annotation.RequestMapping)) && execution(public * *(..))")
     public Object controllerExecution(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        System.out.println("No mamesssss");
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
                 .currentRequestAttributes())
                 .getRequest();
@@ -36,13 +37,18 @@ public class ControllerAspect {
         String applicationName = environment.getProperty("spring.application.name") != null ? environment.getProperty("spring.application.name") : "";
         Long timeStarted = System.currentTimeMillis();
         try{
+            System.out.println("No mamesssss");
             ResponseEntity<Object> result = (ResponseEntity<Object>) proceedingJoinPoint.proceed();
+            System.out.println("No mamesssss");
             loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
                                      result.getStatusCode().value(),result.getBody(),applicationName);
+            System.out.println("No mamesssss");
             return result;
         } catch(Exception e) {
+            System.out.println("No mamesssss2222");
             loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
             500 ,"Error en el servicio",applicationName);
+            System.out.println("No mamessss3333");
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

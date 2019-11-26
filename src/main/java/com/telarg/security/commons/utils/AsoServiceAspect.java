@@ -24,8 +24,9 @@ public class AsoServiceAspect {
     @Autowired
     LoggerMetrics loggerMetrics;
 
-    @Around("execution(* com.telarg.security.services.fiengClients..*.*(..))")
+    @Around("execution(* com.telarg.security.services.fiengClients.*.*(..))")
     public Object asoServiceExecution(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        System.out.println("No jueguess");
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
                 .currentRequestAttributes())
                 .getRequest();
@@ -36,13 +37,17 @@ public class AsoServiceAspect {
         Long timeStarted = System.currentTimeMillis();
         String transactionId = request.getHeader(environment.getProperty("Authorization"));
         try{
+            System.out.println("No jueguess");
             ClassifyResponse result = (ClassifyResponse) proceedingJoinPoint.proceed();
             loggerMetrics.saveMetric(timeStarted, uri.getPath(), transactionId, "telarg.app",
                     200, result.getValue() + " : " +  result.getValue(),environment.getProperty("spring.application.name"));
+            System.out.println("No jueguess");
             return result;
         } catch(Exception asoRequestException) {
+            System.out.println("No jueguess2222222");
             loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
                     500,"",environment.getProperty("spring.application.name"));
+            System.out.println("No jueguess");
             throw asoRequestException;
         }
     }
