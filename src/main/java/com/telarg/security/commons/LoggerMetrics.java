@@ -17,7 +17,7 @@ public class LoggerMetrics {
     private static final Log log = LogFactory.getLog(LoggerMetrics.class);
 
     public void saveMetric(Long timeStarted, String  endpoint, String transactionId,
-                                  String applicationId, Integer statusCode, Object response, String serviceName){
+                                  String applicationId, Integer statusCode, Object response, String serviceName, boolean isController){
         ObjectMapper objectMapper = new ObjectMapper();
         Long timeFinished = System.currentTimeMillis();
         Long timeElapsed = timeFinished - timeStarted;
@@ -32,6 +32,10 @@ public class LoggerMetrics {
         metricData.put("elapsedTime",timeElapsed);
         metricData.put("httpStatus",statusCode);
         metricData.put("serviceName",serviceName);
+        if (isController)
+            metricData.put("source","Controller");
+        else
+            metricData.put("source","Classifier");
         try {
             metricData.put("response", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(response));
         }catch (JsonProcessingException jpException){

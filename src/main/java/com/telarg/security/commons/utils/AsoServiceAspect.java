@@ -14,7 +14,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.URI;
 
 @Aspect
 @Component
@@ -36,12 +35,12 @@ public class AsoServiceAspect {
         try{
             ClassifyResponse result = (ClassifyResponse) proceedingJoinPoint.proceed();
             loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
-                    200, result.getTag() + " : " +  result.getValue(),environment.getProperty("spring.application.name"));
+                    200, result.getTag() + " : " +  result.getValue(),environment.getProperty("spring.application.name"), false);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch(Exception e) {
             e.printStackTrace();
             loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
-                    500,"",environment.getProperty("spring.application.name"));
+                    500,"",environment.getProperty("spring.application.name"), false);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }

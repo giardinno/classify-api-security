@@ -40,12 +40,12 @@ public class ControllerAspect {
             try {
                 ResponseEntity<Object> result = (ResponseEntity<Object>) proceedingJoinPoint.proceed();
                 loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
-                        result.getStatusCode().value(), result.getBody(), applicationName);
+                        result.getStatusCode().value(), result.getBody(), applicationName, true);
                 return result;
             } catch (Exception e) {
                 e.printStackTrace();
                 loggerMetrics.saveMetric(timeStarted, request.getRequestURI(), transactionId, "telarg.app",
-                        500, "Error en el servicio", applicationName);
+                        500, "Error en el servicio", applicationName, true);
 
             }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
