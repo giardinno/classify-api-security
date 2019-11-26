@@ -26,7 +26,7 @@ public class DesconocidosController {
         return new ResponseEntity<>(new DesconocidosResponse(mensajesDesconocidosRepository.findAll()), HttpStatus.OK);
     }
 
-    @PostMapping("/desconocidos/{id}/{classId}")
+    @GetMapping("/desconocidos/{id}/{classId}")
     public ResponseEntity<Object> saveDesconocido(@PathVariable("id") int id, @PathVariable("classId") int classId){
         MensajesDesconocidos  mensajesDesconocidos = mensajesDesconocidosRepository.findById(id).get();
         historicoRepository.save(
