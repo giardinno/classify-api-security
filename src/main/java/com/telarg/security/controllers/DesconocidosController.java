@@ -54,7 +54,7 @@ public class DesconocidosController {
         historicoRepository.save(
             new Historico(
                 new Clasificacion(classifications),
-                mensajesDesconocidos.getMessage()
+                mensajesDesconocidos.get().getMessage()
             )
         );
         mensajesDesconocidosRepository.deleteById(id);
