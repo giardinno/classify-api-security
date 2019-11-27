@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 public class DesconocidosController {
 
@@ -29,8 +31,8 @@ public class DesconocidosController {
 
     @GetMapping("/desconocidos/{id}/{classId}")
     public ResponseEntity<Object> saveDesconocido(@PathVariable("id") int id, @PathVariable("classId") int classId){
-        MensajesDesconocidos  mensajesDesconocidos = mensajesDesconocidosRepository.findById(id).get();
-        if (mensajesDesconocidos == null){
+        Optional<MensajesDesconocidos> mensajesDesconocidos = mensajesDesconocidosRepository.findById(id);
+        if (mensajesDesconocidos == null || !mensajesDesconocidos.isPresent()){
             JSONObject response = new JSONObject();
             response.put("message", "Id de mensaje no valido");
             return new ResponseEntity<>(
