@@ -7,6 +7,7 @@ import com.telarg.security.data.vo.DesconocidosResponse;
 import com.telarg.security.repositories.HistoricoRepository;
 import com.telarg.security.repositories.MensajesDesconocidosRepository;
 import com.telarg.security.utils.Classifications;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +30,28 @@ public class DesconocidosController {
     @GetMapping("/desconocidos/{id}/{classId}")
     public ResponseEntity<Object> saveDesconocido(@PathVariable("id") int id, @PathVariable("classId") int classId){
         MensajesDesconocidos  mensajesDesconocidos = mensajesDesconocidosRepository.findById(id).get();
+        if (mensajesDesconocidos == null){
+            JSONObject response = new JSONObject();
+            response.put("message", "Id de mensaje no valido");
+            return new ResponseEntity<>(
+                    response,
+                    HttpStatus.BAD_REQUEST
+            );
+        }
+        Classifications classifications = null;
+        try {
+            classifications = Classifications.values()[classId];
+        }catch(Exception e){
+            JSONObject response = new JSONObject();
+            response.put("message", "Id de Clasificación no valido");
+            return new ResponseEntity<>(
+                    response,
+                    HttpStatus.BAD_REQUEST
+            );
+        }
         historicoRepository.save(
             new Historico(
-                new Clasificacion(Classifications.values()[classId]),
+                new Clasificacion(classifications),
                 mensajesDesconocidos.getMessage()
             )
         );
