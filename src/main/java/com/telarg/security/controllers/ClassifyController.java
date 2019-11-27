@@ -11,6 +11,7 @@ import com.telarg.security.services.fiengClients.ClassifyClient;
 import com.telarg.security.utils.Classifications;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,14 @@ public class ClassifyController {
 
     @PostMapping("/classify")
     public ResponseEntity<Object> classify(@Valid @RequestBody ClassifyRequest classifyRequest){
+        if (classifyRequest.getMessage() == null || classifyRequest.getMessage().isEmpty()){
+            JSONObject response = new JSONObject();
+            response.put("message", "El mensaje no puede ser vacío");
+            return new ResponseEntity<>(
+                    response,
+                    HttpStatus.BAD_REQUEST
+            );
+        }
         ResponseEntity<ClassifyResponse> classifyResponse= classifyClient.getClasification(classifyRequest);
         Classifications classifications = Classifications.fromValue(classifyResponse.getBody().getTag());
         if ( classifications != null && !classifications.equals(Classifications.DESCONOCIDO)) {
