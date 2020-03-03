@@ -24,7 +24,7 @@ public class Reporte {
     public Reporte( Clasificacion clasificacion) {
         this.id = clasificacion.getClassifications();
         this.clasificacion = clasificacion;
-        this.contador = 0;
+        this.contador = 11;
     }
 
     public Reporte(Clasificacion clasificacion, int contador) {

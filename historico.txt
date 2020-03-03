@@ -5,19 +5,15 @@ Falta de Servicio|No tengo servicio regular desde el 26 de Febrero, esto lo escr
 Falta de Servicio|No hé tenido líena durante tres días y nadié ha sido capaz de resolverme.
 Falta de Servicio|Nunca hay recepcion, ni para llamar o para recibir llamadas, ni mensajes, no internet, nada de nada,
 Falta de Servicio|Si necesitan un servicio de telefonia definitivamente es la peor de todas y las recargas tambien te las roba
-Falta de Servicio|me dejaron sin servicio 10 dias, por un problema que ellos habian identificado desde hace 30 dias
 Falta de Servicio|Nunca tengo red con ustedes, es imposible que digan que son una compañía de comunicación
 Falta de Servicio|Su aplicación nunca funciona. ni su red de telefonía.
 Falta de Servicio|Su recepcion es un asco.
-Falta de Servicio|no hé podido realizar una llamada en todo el día
 Falta de Servicio|Unicamente puedo enviar mensajes de texto, no me sirve este servicio
-Cobros indebidos|Yo nunca hé descargado ningún juego y me lo estan cobrando
 Cobros indebidos|Realicé el pago en el dia indicado, y aún así me me cobran comisión por pago tardío
 Cobros indebidos|Realicé el pago en el día indicado, y aún asi me me cobran recargos
 Cobros indebidos|El cobro que me están haciendo sobre el servicio es demasiado, no es lo que contraté
 Cobros indebidos|No es posible que tenga que estar cerciorandome de que me cobran lo adecuado que contraté con ustedes
 Cobros indebidos|Estoy revisando mi estado de cuenta y encuentro triplicado un cargo.
-Cobros indebidos|Me están cobrando el doble de lo que deberían
 Cobros indebidos|El monto de lo que me estan cobrando, no es el correcto, como siempre todo mal
 Cobros indebidos|Mis consumos no han rebasado mi limite y aún así me cobran extra.
 Cobros indebidos|En mi estado de cuenta me estan cobrando un cargo en el extranjero.
@@ -35,19 +31,15 @@ Problemas de facturación|Los montos de la compra reflejada en la factura no son
 Problemas de facturación|Necesito apoyo en una refactura
 Problemas de facturación|Mi domicilio en la factura no es la correcta
 Problemas de facturación|Mi factura no cuenta el método de pago correcto.
-Problemas de facturación|Mi factura nunca llegó.
-Problemas de facturación|La factura que ustedes expiden no tiene sentido
 Quejas|La atención de sus ejecutivos es nefasta. muy mal servicio por parte de ellos.
 Quejas|Són muy eficaces para cobrar y sancionar, pero no para resolverte problemas, pésima compañía, pésimo servicio.
 Quejas|No veo cuales son las ventajas de su sevicio.
 Quejas|Terrible servicio al cliente.
 Quejas|Servicio decepcionante de sus ejectivos.
 Quejas|Nunca hé recibido mis estados de cuenta. Los voy a demandar
-Quejas|El trato en su call center es inhumano,
 Quejas|Por enésima vez les pido, que dejen de marcarme para ofrecer sus servicios.
 Quejas|La cobertura de su red es nefasta, pesima. Quiero cancelar
 Quejas|tiene el peor servicio . Quieren cobrarme la instalación de un equipo que nunca se instaló y después de hacer la aclaración
-Quejas|Sus planes de datos en el extranjero son muy caros.
 Quejas|Que porquería de empresa y que porquería de servicio lo malo es que es la menos jodida de las que andan en el mercado.
 Quejas|El servicio y el personal son de lo peor tuve que acudir a la sucursal y no fue de mucha ayuda.
 Reconocimiento|Excelente servicio por parte de su empresa.
@@ -57,9 +49,7 @@ Reconocimiento|Este mensaje es sólo para agradecer la atención que me brindo e
 Reconocimiento|Sirvan estas lineas para agradecer y felicitar.
 Reconocimiento|Esta vez sus ejecutivos hicieron la diferencia.
 Reconocimiento|Excelente trabajo, Muchas gracias.
-Reconocimiento|Quiero agradecer y felicitar al ejecutivo por su gran trabajo.
 Reconocimiento|Solo para agradecer su asesoria y apoyo el dia de hoy.
 Reconocimiento|Vaya que tuve suerte que me hayas respondido tu.
 Reconocimiento|Muchas gracias por el apoyo brindado.
 Reconocimiento|Estoy muy agradecido, esta vez me ayudaron y arreglaron mi problema en un par de minutos, eres eficaz y eficiente.
-Reconocimiento|Solucionaron de manera veloz mi problema, muchas gracas por su ayuda.
