@@ -3,9 +3,11 @@ package com.telarg.security.controllers;
 import com.telarg.security.data.entities.Clasificacion;
 import com.telarg.security.data.entities.Historico;
 import com.telarg.security.data.entities.MensajesDesconocidos;
+import com.telarg.security.data.entities.Reporte;
 import com.telarg.security.data.vo.DesconocidosResponse;
 import com.telarg.security.repositories.HistoricoRepository;
 import com.telarg.security.repositories.MensajesDesconocidosRepository;
+import com.telarg.security.repositories.ReporteRepository;
 import com.telarg.security.utils.Classifications;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class DesconocidosController {
 
     @Autowired
     private HistoricoRepository historicoRepository;
+
+    @Autowired
+    private ReporteRepository reporteRepository;
 
     @GetMapping("/desconocidos")
     public ResponseEntity<Object> getDesconocidos(){
@@ -57,6 +62,11 @@ public class DesconocidosController {
                 mensajesDesconocidos.get().getMessage()
             )
         );
+        Optional<Reporte> reporte = reporteRepository.findById( classifications );
+        if ( reporte.isPresent() ){
+            reporte.get().setContador( ( reporte.get().getContador() + 1 ) );
+            reporteRepository.save(reporte.get());
+        }
         mensajesDesconocidosRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
